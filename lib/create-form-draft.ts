@@ -45,7 +45,7 @@ export function readFormDraft(): FormDraft | null {
   }
 }
 
-export function writeFormDraft(values: FormDraft) {
+export function writeFormDraft(values: FormDraft): void {
   if (typeof window === "undefined") {
     return;
   }
@@ -57,7 +57,7 @@ export function writeFormDraft(values: FormDraft) {
   }
 }
 
-export function clearFormDraft() {
+export function clearFormDraft(): void {
   if (typeof window === "undefined") {
     return;
   }

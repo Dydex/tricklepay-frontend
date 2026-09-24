@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 const DOT_SIZE = {
   sm: "h-1.5 w-1.5",
   md: "h-2 w-2",
@@ -20,7 +22,7 @@ export function BrandSpinner({
 }: {
   label?: string;
   size?: keyof typeof DOT_SIZE;
-}) {
+}): JSX.Element {
   const dot = DOT_SIZE[size];
 
   return (

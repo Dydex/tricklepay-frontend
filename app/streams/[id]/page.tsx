@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { type JSX, useEffect, useState } from "react";
 
 import { LoadingState } from "@/components/loading-state";
 import { StreamDetail } from "@/components/stream-detail";
 import { getStream, isAbortError } from "@/lib/api";
 import type { StreamView } from "@/types/stream";
 
-export default function StreamDetailPage() {
+export default function StreamDetailPage(): JSX.Element {
   const params = useParams<{ id: string }>();
   const id = params.id;
 

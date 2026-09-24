@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { JSX } from "react";
 
 import { CopyButton, ShareLinkButton } from "@/components/copy-button";
 import { ProgressBar } from "@/components/progress-bar";
@@ -46,7 +47,7 @@ function Field({
   );
 }
 
-export function StreamDetail({ stream, onComplete }: { stream: StreamView; onComplete: () => void }) {
+export function StreamDetail({ stream, onComplete }: { stream: StreamView; onComplete: () => void }): JSX.Element {
   const accrual = useAccrual(stream);
   const wallet = useWallet();
   const cliffDisplay =

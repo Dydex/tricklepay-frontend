@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { JSX } from "react";
 
 import { Header } from "@/components/header";
 import { SkipLink } from "@/components/skip-link";
@@ -69,7 +70,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

@@ -1,10 +1,11 @@
 import Link from "next/link";
+import type { JSX } from "react";
 
 import { formatAmount, timeRemaining, truncateAddress } from "@/lib/format";
 import { STREAM_STATUS_META } from "@/lib/stream-status";
 import type { StreamStatus, StreamView } from "@/types/stream";
 
-export function StreamTable({ streams }: { streams: StreamView[] }) {
+export function StreamTable({ streams }: { streams: StreamView[] }): JSX.Element {
   return (
     /* Horizontal scroll on narrow viewports so columns never get crushed */
     <div className="overflow-x-auto rounded-lg border border-neutral-800">

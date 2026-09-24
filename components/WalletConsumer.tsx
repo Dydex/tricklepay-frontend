@@ -7,7 +7,7 @@ import {
   isConnected,
   requestAccess,
 } from "@stellar/freighter-api";
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { type JSX, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { normalizeNetwork } from "@/lib/wallet-utils";
 
@@ -49,7 +49,7 @@ const WalletContext = createContext<WalletState | null>(null);
  * 
  * @param children - The app tree that needs wallet state.
  */
-export function WalletProvider({ children }: { children: React.ReactNode }) {
+export function WalletProvider({ children }: { children: React.ReactNode }): JSX.Element {
   const [address, setAddress] = useState<string | null>(null);
   const [network, setNetwork] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);

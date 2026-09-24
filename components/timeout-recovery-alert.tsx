@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 import { config } from "@/lib/config";
 import { txExplorerUrl } from "@/lib/explorer";
 
@@ -18,7 +20,7 @@ export function TimeoutRecoveryAlert({
   hash: string;
   disabled: boolean;
   onRecheck: () => void;
-}) {
+}): JSX.Element {
   return (
     <div
       role="alert"
