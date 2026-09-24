@@ -6,8 +6,12 @@ import { useEffect, useState } from "react";
 
 import { LoadingState } from "@/components/loading-state";
 import { StreamDetail } from "@/components/stream-detail";
+import { useStreamTitle } from "@/hooks/use-stream-title";
 import { getStream, isAbortError } from "@/lib/api";
 import type { StreamView } from "@/types/stream";
+
+const POLL_INTERVAL_MS = 10_000;
+const HIDDEN_POLL_INTERVAL_MS = 30_000;
 
 export default function StreamDetailPage() {
   const params = useParams<{ id: string }>();
@@ -17,6 +21,8 @@ export default function StreamDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
+
+  useStreamTitle(stream);
 
   useEffect(() => {
     // Navigating away (or retrying) cancels the request outright rather than
@@ -53,9 +59,14 @@ export default function StreamDetailPage() {
     // Every background refetch still open, so leaving the page cancels them all
     // instead of letting a poll started seconds ago run to completion.
     const inFlight = new Set<AbortController>();
+    let lastFetchAt = Date.now();
 
     const silentRefetch = () => {
-      if (typeof document !== "undefined" && document.visibilityState === "hidden") return;
+      // A hidden tab still polls, so the status shown in its title (see
+      // useStreamTitle) keeps up, but at a third of the visible rate.
+      const hidden = typeof document !== "undefined" && document.visibilityState === "hidden";
+      if (hidden && Date.now() - lastFetchAt < HIDDEN_POLL_INTERVAL_MS) return;
+      lastFetchAt = Date.now();
       const controller = new AbortController();
       inFlight.add(controller);
       getStream(id, { signal: controller.signal })
@@ -77,7 +88,7 @@ export default function StreamDetailPage() {
 
     window.addEventListener("focus", onFocus);
     document.addEventListener("visibilitychange", onVisibilityChange);
-    const interval = setInterval(silentRefetch, 10000);
+    const interval = setInterval(silentRefetch, POLL_INTERVAL_MS);
 
     return () => {
       cancelled = true;
