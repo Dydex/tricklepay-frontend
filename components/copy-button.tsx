@@ -2,6 +2,10 @@
 
 import { type JSX, useState } from "react";
 
+// How long the "copied" confirmation stays visible: long enough to notice,
+// short enough that the button is ready again for the next copy.
+const COPIED_FEEDBACK_MS = 1_500;
+
 /**
  * A small button that copies a value to the clipboard and briefly confirms.
  * Used to copy full addresses that are shown truncated.
@@ -16,7 +20,7 @@ export function CopyButton({ value, label }: { value: string; label?: string }):
     try {
       await navigator.clipboard.writeText(value);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setTimeout(() => setCopied(false), COPIED_FEEDBACK_MS);
     } catch {
       // Clipboard unavailable (for example, an insecure context); ignore.
     }

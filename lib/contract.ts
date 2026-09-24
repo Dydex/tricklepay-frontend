@@ -31,6 +31,15 @@ export interface CreateStreamParams {
   cliffTime: bigint;
 }
 
+// Seconds a built transaction stays valid. Covers simulation, the wallet's
+// signing prompt and submission; after that the network rejects it outright.
+const TX_TIMEOUT_SECONDS = 60;
+
+// Confirmation polls getTransaction once a second for up to 30 seconds before
+// giving up with a TransactionTimeoutError the user can recover from.
+const CONFIRM_POLL_INTERVAL_MS = 1_000;
+const CONFIRM_POLL_ATTEMPTS = 30;
+
 function server(): rpc.Server {
   return new rpc.Server(config.rpcUrl, { allowHttp: config.rpcUrl.startsWith("http://") });
 }
@@ -118,7 +127,7 @@ async function invoke(
       networkPassphrase: config.networkPassphrase,
     })
       .addOperation(buildOp(contract))
-      .setTimeout(60)
+      .setTimeout(TX_TIMEOUT_SECONDS)
       .build();
 
     // Simulate and assemble the Soroban resource footprint before signing.
@@ -183,7 +192,7 @@ async function confirm(srv: rpc.Server, hash: string): Promise<string> {
   //
   // This polling loop checks once per second for up to 30 seconds. If the
   // transaction is still not confirmed, it throws a TransactionTimeoutError.
-  for (let attempt = 0; attempt < 30; attempt++) {
+  for (let attempt = 0; attempt < CONFIRM_POLL_ATTEMPTS; attempt++) {
     const result = await srv.getTransaction(hash);
     if (result.status === rpc.Api.GetTransactionStatus.SUCCESS) {
       return hash;
@@ -195,7 +204,7 @@ async function confirm(srv: rpc.Server, hash: string): Promise<string> {
       const raw = extractFailureString(result);
       throw new Error(parseContractError(raw));
     }
-    await sleep(1000);
+    await sleep(CONFIRM_POLL_INTERVAL_MS);
   }
   throw new TransactionTimeoutError(hash);
 }

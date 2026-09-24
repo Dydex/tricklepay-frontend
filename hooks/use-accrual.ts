@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import { vestedAmount, withdrawableAmount } from "@/lib/vesting";
 import type { StreamView } from "@/types/stream";
 
+// How often a streaming balance is recomputed. Vesting is per second on-chain,
+// so a faster tick would re-render without the figure changing.
+const ACCRUAL_TICK_MS = 1_000;
+
 export interface Accrual {
   vested: bigint;
   withdrawable: bigint;
@@ -45,7 +49,7 @@ export function useAccrual(stream: StreamView): Accrual {
   useEffect(() => {
     setAccrual(computeAccrual(stream));
     if (stream.status !== "streaming") return;
-    const interval = setInterval(() => setAccrual(computeAccrual(stream)), 1000);
+    const interval = setInterval(() => setAccrual(computeAccrual(stream)), ACCRUAL_TICK_MS);
     return () => clearInterval(interval);
   }, [stream]);
 

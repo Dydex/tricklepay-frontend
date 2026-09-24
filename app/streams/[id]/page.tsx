@@ -9,6 +9,10 @@ import { StreamDetail } from "@/components/stream-detail";
 import { getStream, isAbortError } from "@/lib/api";
 import type { StreamView } from "@/types/stream";
 
+// How often an open stream refetches in the background. Shorter than the
+// dashboard's interval since someone watching one stream expects it fresher.
+const DETAIL_REFRESH_INTERVAL_MS = 10_000;
+
 export default function StreamDetailPage(): JSX.Element {
   const params = useParams<{ id: string }>();
   const id = params.id;
@@ -77,7 +81,7 @@ export default function StreamDetailPage(): JSX.Element {
 
     window.addEventListener("focus", onFocus);
     document.addEventListener("visibilitychange", onVisibilityChange);
-    const interval = setInterval(silentRefetch, 10000);
+    const interval = setInterval(silentRefetch, DETAIL_REFRESH_INTERVAL_MS);
 
     return () => {
       cancelled = true;
