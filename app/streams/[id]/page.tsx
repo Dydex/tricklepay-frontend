@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { getStream, isAbortError } from "@/lib/api";
 import { StreamDetail } from "@/components/stream-detail";
-import { StreamDetailSkeleton } from "@/components/skeleton";
+import { LoadingState } from "@/components/loading-state";
 import type { StreamView } from "@/types/stream";
 
 export default function StreamDetailPage() {
@@ -92,7 +92,11 @@ export default function StreamDetailPage() {
   // the current detail (and StreamActions' confirmation state, like the
   // explorer link for the tx just confirmed) on screen until fresh data lands.
   if (loading && !stream) {
-    return <StreamDetailSkeleton />;
+    return (
+      <main id="main-content" className="mx-auto max-w-2xl px-6 py-10">
+        <LoadingState variant="stream-detail" />
+      </main>
+    );
   }
   if (error) {
     return (

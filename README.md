@@ -78,7 +78,7 @@ See also [Running locally](#running-locally) for the short version,
 - **Keyboard focus visibility** — every interactive element gets a consistent, high-contrast focus ring when navigated to via keyboard (`:focus-visible` in `app/globals.css`), independent of any per-component focus styling.
 - **Reduced-motion support** — visitors with the OS-level "reduce motion" preference enabled get all animations and transitions (skeleton shimmer, spinners, progress pulses, hover/focus transitions) collapsed to a single frame, app-wide (`prefers-reduced-motion` in `app/globals.css`).
 - **Light theme toggle** — a header button flips the whole app between dark (default) and light, persisted in `localStorage` and applied before first paint to avoid a flash of the wrong theme. See `components/theme-toggle.tsx`, `components/theme-provider.tsx`, and `lib/theme.ts`.
-- **Branded loading indicator** — indeterminate loading states (route transitions, wallet connect) use `components/brand-spinner.tsx`, three bouncing indigo dots echoing the trickle-drop mark in `app/icon.svg`, instead of a generic spinner. Content-shaped loading (stream lists, stream detail) keeps the existing skeletons in `components/skeleton.tsx`.
+- **Branded loading indicator** — indeterminate loading states (route transitions, wallet connect) use `components/brand-spinner.tsx`, three bouncing indigo dots echoing the trickle-drop mark in `app/icon.svg`, instead of a generic spinner. Content-shaped loading (stream lists, stream detail) keeps the existing skeletons in `components/skeleton.tsx`. Every view renders either one through the shared `components/loading-state.tsx`, so loading is announced to screen readers the same way everywhere.
 
 ## Stack
 
@@ -352,6 +352,7 @@ components/
   theme-provider.tsx    app-wide light/dark theme state via context
   theme-toggle.tsx      header button that flips the theme
   brand-spinner.tsx     branded loading indicator (bouncing dots)
+  loading-state.tsx     shared loading state every data view renders
   wallet-provider.tsx   app-wide Freighter connection state via context
   wallet-button.tsx     connect / address / network state
   stream-card.tsx       stream summary card
