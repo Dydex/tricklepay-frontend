@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getStream, isAbortError } from "@/lib/api";
-import { StreamDetail } from "@/components/stream-detail";
+import { useEffect, useState } from "react";
+
 import { LoadingState } from "@/components/loading-state";
+import { StreamDetail } from "@/components/stream-detail";
+import { getStream, isAbortError } from "@/lib/api";
 import type { StreamView } from "@/types/stream";
 
 export default function StreamDetailPage() {

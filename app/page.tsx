@@ -2,13 +2,14 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { useWallet } from "@/components/wallet-provider";
-import { useStreamPage, type StreamPage } from "@/hooks/use-stream-page";
-import { StreamList } from "@/components/stream-list";
+
+import { BrowserSupportNote } from "@/components/browser-support-note";
 import { LoadingState } from "@/components/loading-state";
+import { StreamList } from "@/components/stream-list";
 import { StreamStatusLegend } from "@/components/stream-status-legend";
 import { TransactionNotice } from "@/components/transaction-notice";
-import { BrowserSupportNote } from "@/components/browser-support-note";
+import { useWallet } from "@/components/wallet-provider";
+import { useStreamPage, type StreamPage } from "@/hooks/use-stream-page";
 import { takePendingNotice, type PendingNotice } from "@/lib/pending-notice";
 import type { StreamStatus } from "@/types/stream";
 

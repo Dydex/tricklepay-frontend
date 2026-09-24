@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { installFreighterStub, TEST_ADDRESS } from "./fixtures/freighter";
+
 import { truncateAddress } from "@/lib/format";
+
 import {
   TOKEN_ID,
   TX_HASH,
@@ -9,6 +10,7 @@ import {
   streamingStream,
   type StreamStore,
 } from "./fixtures/chain";
+import { installFreighterStub, TEST_ADDRESS } from "./fixtures/freighter";
 
 // The create -> withdraw happy path, end to end through the real UI against a
 // faked wallet and chain. See e2e/README.md for the boundaries of this test.

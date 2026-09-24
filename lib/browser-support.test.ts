@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { isSupportedBrowser, SUPPORTED_DESKTOP_BROWSERS } from "./browser-support";
 
 describe("browser support helper", () => {

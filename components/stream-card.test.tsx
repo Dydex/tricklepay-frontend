@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { StreamCard } from "./stream-card";
+
 import type { StreamView } from "@/types/stream";
+
+import { StreamCard } from "./stream-card";
 
 describe("StreamCard", () => {
   const baseStream: StreamView = {

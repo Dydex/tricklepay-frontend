@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
 import type { ReactNode } from "react";
+import { describe, it, expect, vi } from "vitest";
 
 vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();

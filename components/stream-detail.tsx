@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useAccrual } from "@/hooks/use-accrual";
-import { useWallet } from "@/components/wallet-provider";
-import { StreamActions } from "@/components/stream-actions";
+
 import { CopyButton, ShareLinkButton } from "@/components/copy-button";
 import { ProgressBar } from "@/components/progress-bar";
+import { StreamActions } from "@/components/stream-actions";
+import { useWallet } from "@/components/wallet-provider";
+import { useAccrual } from "@/hooks/use-accrual";
 import { formatAmount, formatTime, formatTokenDisplay, relativeTime, truncateAddress } from "@/lib/format";
 import { formatUtcFromUnixSeconds, resolvedTimeZoneLabel } from "@/lib/timezone";
 import type { StreamView } from "@/types/stream";

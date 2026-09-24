@@ -10,6 +10,7 @@ vi.mock("@/hooks/use-network-guard", () => ({
 
 import { useWallet } from "@/components/wallet-provider";
 import { useNetworkGuard } from "@/hooks/use-network-guard";
+
 import { WalletButton } from "./wallet-button";
 
 function mockDisconnected() {

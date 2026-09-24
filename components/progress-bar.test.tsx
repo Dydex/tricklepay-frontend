@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+
 import { ProgressBar } from "./progress-bar";
 
 describe("ProgressBar", () => {

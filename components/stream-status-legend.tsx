@@ -1,5 +1,5 @@
-import type { StreamStatus } from "@/types/stream";
 import { STREAM_STATUS_META } from "@/lib/stream-status";
+import type { StreamStatus } from "@/types/stream";
 
 /**
  * A compact, accessible legend explaining what each stream status badge means.

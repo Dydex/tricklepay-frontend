@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { TransactionTimeoutError } from "@/lib/contract";
 
 describe("TransactionTimeoutError", () => {

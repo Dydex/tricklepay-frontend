@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+
 import { StreamList } from "./stream-list";
 
 describe("StreamList", () => {

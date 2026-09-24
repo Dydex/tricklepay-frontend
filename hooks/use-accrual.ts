@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { StreamView } from "@/types/stream";
+
 import { vestedAmount, withdrawableAmount } from "@/lib/vesting";
+import type { StreamView } from "@/types/stream";
 
 export interface Accrual {
   vested: bigint;

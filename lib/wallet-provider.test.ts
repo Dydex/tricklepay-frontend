@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from "vitest";
-import { normalizeNetwork } from "@/lib/wallet-utils";
 import * as freighter from "@stellar/freighter-api";
+import { describe, it, expect, vi } from "vitest";
+
+import { normalizeNetwork } from "@/lib/wallet-utils";
 
 // Mock @stellar/freighter-api methods
 vi.mock("@stellar/freighter-api", () => ({

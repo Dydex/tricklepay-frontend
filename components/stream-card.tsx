@@ -1,7 +1,8 @@
 import Link from "next/link";
-import type { StreamStatus, StreamView } from "@/types/stream";
+
 import { formatAmount, timeRemaining, truncateAddress } from "@/lib/format";
 import { STREAM_STATUS_META } from "@/lib/stream-status";
+import type { StreamStatus, StreamView } from "@/types/stream";
 
 export function StreamCard({ stream }: { stream: StreamView }) {
   return (

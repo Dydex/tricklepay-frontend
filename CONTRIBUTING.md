@@ -117,6 +117,30 @@ tricklepay-frontend/
    - Focus the first invalid field upon form submission to aid keyboard users.
    - Amount inputs must strictly reject invalid decimals (> 7 decimal places, scientific notation, negatives) before performing `BigInt` conversion.
 
+4. **Import order**:
+   Imports sit at the top of the file (after any `"use client"` directive), in these groups, separated by one blank line:
+
+   1. Node built-ins (`path`, `url`, `node:*`)
+   2. External packages (`react`, `next/*`, `@stellar/*`, `vitest`, …)
+   3. Internal aliases (`@/components/*`, `@/hooks/*`, `@/lib/*`, `@/types/*`)
+   4. Relative paths (`../`, `./`)
+   5. Stylesheets (`./globals.css`), always last
+
+   Within a group, statements are sorted alphabetically by module path, case-insensitively. `import type` statements sort with the rest of their group; they are not split out. In tests, imports of modules that `vi.mock` replaces may follow the `vi.mock` calls, sorted the same way.
+
+   ```ts
+   import Link from "next/link";
+   import { useState } from "react";
+
+   import { useWallet } from "@/components/wallet-provider";
+   import { formatAmount } from "@/lib/format";
+   import type { StreamView } from "@/types/stream";
+
+   import { Field } from "./field";
+   ```
+
+   ESLint's `import/order` rule enforces this (`eslint.config.mjs`); `npm run lint -- --fix` reorders a file for you.
+
 ---
 
 ## 🔒 State Management & Wallet Handoff

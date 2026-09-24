@@ -18,8 +18,9 @@
 // - Validations of the submitted transaction envelope (the signature is ignored).
 // - Horizon requests (which the app does not make directly).
 
-import { Keypair, xdr } from "@stellar/stellar-sdk";
 import type { Page, Route } from "@playwright/test";
+import { Keypair, xdr } from "@stellar/stellar-sdk";
+
 import type { StreamView } from "../../types/stream";
 
 export const RPC_URL = "http://localhost:8000/soroban/rpc";
