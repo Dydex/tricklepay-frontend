@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+
 import {
   formatAmount,
   formatDuration,
+  formatMaxWithdrawHint,
   formatTokenDisplay,
   relativeTime,
   timeRemaining,
@@ -51,6 +53,33 @@ describe("formatAmount", () => {
 
   it("treats an empty string as zero, the way BigInt does", () => {
     expect(formatAmount("")).toBe("0");
+  });
+});
+
+describe("formatAmount boundaries", () => {
+  it("renders zero as a visible '0', never an empty string", () => {
+    expect(formatAmount("0")).toBe("0");
+    expect(formatAmount("0000000")).toBe("0");
+    expect(formatMaxWithdrawHint("0")).toBe("Maximum withdrawable amount: 0");
+  });
+
+  it("keeps every digit of amounts near the i128 maximum", () => {
+    // i128::MAX, the largest amount the contract can hold.
+    expect(formatAmount("170141183460469231731687303715884105727")).toBe(
+      "17014118346046923173168730371588.4105727",
+    );
+    // A single stroop above a huge whole amount must survive, not round away.
+    expect(formatAmount("100000000000000000000000000000000000001")).toBe(
+      "10000000000000000000000000000000.0000001",
+    );
+    // u64::MAX, past where Number would start dropping digits.
+    expect(formatAmount("18446744073709551615")).toBe("1844674407370.9551615");
+  });
+
+  it("renders huge whole amounts without a decimal point", () => {
+    expect(formatAmount("100000000000000000000000000000000000000")).toBe(
+      "10000000000000000000000000000000",
+    );
   });
 });
 

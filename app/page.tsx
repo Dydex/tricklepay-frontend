@@ -2,13 +2,14 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { useWallet } from "@/components/wallet-provider";
-import { useStreamPage, type StreamPage } from "@/hooks/use-stream-page";
+
+import { BrowserSupportNote } from "@/components/browser-support-note";
+import { LoadingState } from "@/components/loading-state";
 import { StreamList } from "@/components/stream-list";
-import { StreamListSkeleton } from "@/components/skeleton";
 import { StreamStatusLegend } from "@/components/stream-status-legend";
 import { TransactionNotice } from "@/components/transaction-notice";
-import { BrowserSupportNote } from "@/components/browser-support-note";
+import { useWallet } from "@/components/wallet-provider";
+import { useStreamPage, type StreamPage } from "@/hooks/use-stream-page";
 import { takePendingNotice, type PendingNotice } from "@/lib/pending-notice";
 import type { StreamStatus } from "@/types/stream";
 
@@ -92,7 +93,7 @@ function StreamSection({
       )}
 
       {page.loading ? (
-        <StreamListSkeleton count={2} />
+        <LoadingState variant="stream-list" label={`Loading ${title.toLowerCase()} streams`} />
       ) : (
         <StreamList streams={visible} emptyMessage={emptyText} showCreateLink={showCreate} />
       )}
@@ -116,7 +117,13 @@ function StreamSection({
 // without one the static export bails and the build fails.
 export default function Home() {
   return (
-    <Suspense fallback={<StreamListSkeleton count={2} />}>
+    <Suspense
+      fallback={
+        <main id="main-content" className="mx-auto max-w-4xl px-6 py-10">
+          <LoadingState variant="stream-list" />
+        </main>
+      }
+    >
       <Dashboard />
     </Suspense>
   );

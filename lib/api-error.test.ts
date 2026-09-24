@@ -1,4 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
+
 import { listStreams, getStream } from "./api";
 
 describe("api client — non-success responses", () => {

@@ -117,8 +117,9 @@ vi.mock("@/lib/api", async (importOriginal) => {
   return { ...actual, listStreams: vi.fn() };
 });
 
-import { useStreamPage, PAGE_SIZE } from "./use-stream-page";
 import { listStreams } from "@/lib/api";
+
+import { useStreamPage, PAGE_SIZE } from "./use-stream-page";
 
 const ADDRESS = "GAAZI4TCR3TY5OJHCTJC2A4QSY6CJWJH5IAJTGKIN2ER7LBNVKOCCWN7";
 

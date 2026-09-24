@@ -1,7 +1,8 @@
 // Skeleton shimmer primitives and composed page-level skeletons.
 // Every skeleton is sized to match its real counterpart so that no layout shift
 // occurs when data arrives. Dimensions are taken directly from the components
-// they stand in for.
+// they stand in for. Skeletons are purely visual: views render them through
+// LoadingState (components/loading-state.tsx), which owns the announcement.
 
 // ---------------------------------------------------------------------------
 // Base primitive
@@ -33,7 +34,7 @@ export function Skeleton({ className = "" }: { className?: string }) {
 export function StreamCardSkeleton() {
   return (
     <div
-      aria-label="Loading stream"
+      aria-hidden="true"
       className="block rounded-lg border border-neutral-800 bg-neutral-950 p-4"
     >
       {/* Header: mono id + status badge */}
@@ -98,7 +99,7 @@ export function StreamListSkeleton({ count = 4 }: { count?: number }) {
 // ---------------------------------------------------------------------------
 export function StreamDetailSkeleton() {
   return (
-    <main className="mx-auto max-w-2xl px-6 py-10" aria-label="Loading stream details">
+    <div aria-hidden="true">
       {/* Back link */}
       <Skeleton className="h-3 w-10" />
 
@@ -136,6 +137,6 @@ export function StreamDetailSkeleton() {
         <Skeleton className="h-9 w-24 rounded" />
         <Skeleton className="h-9 w-28 rounded" />
       </div>
-    </main>
+    </div>
   );
 }

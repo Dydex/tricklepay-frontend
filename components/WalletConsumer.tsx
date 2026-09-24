@@ -1,6 +1,5 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   getAddress,
   getNetwork,
@@ -8,6 +7,9 @@ import {
   isConnected,
   requestAccess,
 } from "@stellar/freighter-api";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+
+import { normalizeNetwork } from "@/lib/wallet-utils";
 
 export interface WalletState {
   address: string | null;
@@ -17,8 +19,6 @@ export interface WalletState {
   connect: () => Promise<void>;
   disconnect: () => void;
 }
-
-import { normalizeNetwork } from "@/lib/wallet-utils";
 
 const WalletContext = createContext<WalletState | null>(null);
 

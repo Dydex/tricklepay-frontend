@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import {
   CONTRACT_ERROR_MESSAGES,
   GENERIC_FAILURE,

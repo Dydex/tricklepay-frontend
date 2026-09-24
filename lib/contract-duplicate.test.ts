@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { isTransactionPending } from "@/lib/contract";
 
 describe("duplicate transaction submission prevention", () => {

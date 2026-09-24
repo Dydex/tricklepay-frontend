@@ -1,6 +1,7 @@
-import { describe, it, expect } from "vitest";
 import React, { Suspense } from "react";
 import type { ReactElement, ReactNode } from "react";
+import { describe, it, expect } from "vitest";
+
 import { Skeleton } from "./skeleton";
 
 describe("Skeleton Loading States", () => {

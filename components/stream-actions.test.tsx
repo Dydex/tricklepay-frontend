@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { canSenderCancel } from "./stream-actions";
+
 import type { StreamView } from "@/types/stream";
+
+import { canSenderCancel } from "./stream-actions";
 
 const stream = {
   id: "1",
