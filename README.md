@@ -357,17 +357,26 @@ components/
   wallet-button.tsx     connect / address / network state
   stream-card.tsx       stream summary card
   stream-list.tsx       grid of cards with an empty state
-  create-form.tsx       new-stream form
-  stream-actions.tsx    withdraw and cancel buttons
+  create-form.tsx       new-stream flow: form, then review step
+  create-stream-fields.tsx new-stream form inputs and live previews
+  stream-actions.tsx    withdraw and cancel actions for a stream
+  withdraw-panel.tsx    recipient's withdrawal amount and button
+  cancel-stream-control.tsx sender's two-step cancel
+  timeout-recovery-alert.tsx re-check a transaction whose confirmation timed out
   transaction-progress.tsx transaction progress stage indicator
 hooks/
   use-accrual.ts        per-second vested/withdrawable recomputation
+  use-create-stream-form.ts create-form state, validation, and transactions
+  use-stream-actions.ts withdraw/cancel state and transactions
 lib/
   config.ts             client configuration
   api.ts                backend API client
   contract.ts           build, sign, submit, confirm contract calls with stage tracking
   vesting.ts            linear vesting math, mirroring the contract
   format.ts             amount and address formatting
+  create-stream-validation.ts create-form field validation rules
+  create-form-draft.ts  create-form draft persistence
+  stream-actions.ts     who may cancel, and why withdrawal is blocked
   theme.ts              pure light/dark theme resolution logic
 types/
   stream.ts             API response types

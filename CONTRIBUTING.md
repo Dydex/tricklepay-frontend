@@ -88,8 +88,8 @@ tricklepay-frontend/
 │   └── streams/          # Detailed stream list & management
 ├── components/           # React UI components & providers
 │   ├── wallet-provider.tsx # Single-source wallet state & context provider
-│   ├── create-form.tsx   # Stream creation form component
-│   └── stream-actions.tsx# Stream operation buttons (withdraw, pause, cancel)
+│   ├── create-form.tsx   # Stream creation flow (behaviour in hooks/use-create-stream-form.ts)
+│   └── stream-actions.tsx# Withdraw and cancel actions (behaviour in hooks/use-stream-actions.ts)
 ├── lib/                  # Core domain logic, validation, & SDK helpers
 │   ├── validation.ts     # Pure form validation utilities
 │   ├── contract.ts       # Soroban contract interaction & RPC submission
