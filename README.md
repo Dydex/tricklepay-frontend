@@ -57,6 +57,7 @@ See also [Running locally](#running-locally) for the short version,
   - [Module Map](#module-map)
 - [API contract](#api-contract)
 - [Related repositories](#related-repositories)
+- [Code of Conduct](#code-of-conduct)
 - [License](#license)
 
 ## Features
@@ -407,6 +408,12 @@ mapping are all documented in [docs/api-contract.md](docs/api-contract.md).
 - **tricklepay-contracts** — the Soroban streaming contract.
 - **tricklepay-backend** — indexer and read API this client consumes.
 - **tricklepay-docs** — architecture, security model, and contributor guides.
+
+## Code of Conduct
+
+Everyone taking part in this project is expected to follow the
+[Code of Conduct](CODE_OF_CONDUCT.md), the same Contributor Covenant the
+contract and backend repositories use.
 
 ## License
 

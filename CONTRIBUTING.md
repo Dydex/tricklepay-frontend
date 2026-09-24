@@ -2,6 +2,8 @@
 
 Thank you for your interest in contributing to **TricklePay**! This guide outlines our development workflow, coding conventions, testing patterns, and pull request guidelines to help you get started quickly.
 
+By taking part you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ---
 
 ## 📖 Table of Contents
