@@ -8,6 +8,7 @@ import {
   parseStreamView,
 } from "@/lib/api-schema";
 import { config } from "@/lib/config";
+import { mockGetStream, mockListStreams } from "@/lib/mock-api";
 import type { StreamListResponse, StreamStatus, StreamView } from "@/types/stream";
 
 export { ApiResponseError } from "@/lib/api-schema";
@@ -154,6 +155,8 @@ export async function listStreams(
   params: ListStreamsParams = {},
   options: RequestOptions = {},
 ): Promise<StreamListResponse> {
+  if (config.mockApi) return mockListStreams(params);
+
   const url = new URL("/streams", config.apiUrl);
   if (params.sender) url.searchParams.set("sender", params.sender);
   if (params.recipient) url.searchParams.set("recipient", params.recipient);
@@ -174,6 +177,8 @@ export async function getStream(
   id: string,
   options: RequestOptions = {},
 ): Promise<StreamView | null> {
+  if (config.mockApi) return mockGetStream(id);
+
   const url = new URL(`/streams/${id}`, config.apiUrl);
 
   return request(url, `stream ${id}`, options, async (res) => {

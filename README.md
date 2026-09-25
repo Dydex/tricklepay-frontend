@@ -57,6 +57,7 @@ See also [Running locally](#running-locally) for the short version,
   - [Module Map](#module-map)
 - [API contract](#api-contract)
 - [Related repositories](#related-repositories)
+- [Code of Conduct](#code-of-conduct)
 - [License](#license)
 
 ## Features
@@ -73,6 +74,7 @@ See also [Running locally](#running-locally) for the short version,
 - **Withdraw** as the recipient and **cancel** as the sender, each built, signed,
   submitted, and confirmed on-chain with step-by-step transaction progress stages (Preparing -> Sign -> Submit -> Confirm).
 - **Duplicate submission protection** — in-flight invocation guards in contract utilities and components prevent double-submitting active transactions.
+- **Status in the tab title** — a stream's detail page puts its status glyph and label at the front of the document title (`● Streaming · Stream #42 — TricklePay`), keeps polling at a slower rate while the tab is in the background, and prefixes `(!)` when the status changed while you were away. See `hooks/use-stream-title.ts` and `lib/document-title.ts`.
 - **Transaction timeout recovery** — explicit recovery UI allows re-checking confirmation by transaction hash if network confirmation times out without re-submitting.
 - **Maximum withdraw amount hint** — accessible hint and quick "Max" action fill the withdrawal input directly with the live vested balance.
 - **Keyboard focus visibility** — every interactive element gets a consistent, high-contrast focus ring when navigated to via keyboard (`:focus-visible` in `app/globals.css`), independent of any per-component focus styling.
@@ -407,6 +409,12 @@ mapping are all documented in [docs/api-contract.md](docs/api-contract.md).
 - **tricklepay-contracts** — the Soroban streaming contract.
 - **tricklepay-backend** — indexer and read API this client consumes.
 - **tricklepay-docs** — architecture, security model, and contributor guides.
+
+## Code of Conduct
+
+Everyone taking part in this project is expected to follow the
+[Code of Conduct](CODE_OF_CONDUCT.md), the same Contributor Covenant the
+contract and backend repositories use.
 
 ## License
 

@@ -18,6 +18,15 @@ const DEFAULT_RPC_URLS: Record<string, string> = {
 
 const network = process.env.NEXT_PUBLIC_NETWORK ?? "testnet";
 
+// Mock mode serves fixture data from lib/mock-api.ts instead of calling the
+// backend, for interface work without the API or a database running.
+const mockApi = process.env.NEXT_PUBLIC_MOCK_API === "true";
+
+// Stands in for NEXT_PUBLIC_CONTRACT_ID in mock mode, so the app boots without
+// a deployment. It is a well-formed address that no real contract lives at;
+// on-chain writes still need a real id.
+const MOCK_CONTRACT_ID = "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM";
+
 // How long a backend read may run before it is aborted. Long enough that a
 // cold backend or a slow connection still succeeds, short enough that an
 // unreachable one surfaces as an actionable error instead of a skeleton that
@@ -51,7 +60,9 @@ export const config = {
   /** Soroban RPC endpoint, used to submit signed transactions. */
   rpcUrl: process.env.NEXT_PUBLIC_RPC_URL ?? DEFAULT_RPC_URLS[network] ?? DEFAULT_RPC_URLS.testnet,
   /** Deployed stream contract id (starts with C). */
-  contractId: process.env.NEXT_PUBLIC_CONTRACT_ID ?? "",
+  contractId: process.env.NEXT_PUBLIC_CONTRACT_ID || (mockApi ? MOCK_CONTRACT_ID : ""),
+  /** Serve fixture data instead of calling the backend (NEXT_PUBLIC_MOCK_API=true). */
+  mockApi,
   /**
    * Milliseconds a backend read API request may take before it is aborted.
    * 0 means no timeout. Applies to lib/api.ts only — on-chain transactions

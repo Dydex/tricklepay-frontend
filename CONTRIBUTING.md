@@ -2,6 +2,8 @@
 
 Thank you for your interest in contributing to **TricklePay**! This guide outlines our development workflow, coding conventions, testing patterns, and pull request guidelines to help you get started quickly.
 
+By taking part you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ---
 
 ## 📖 Table of Contents
@@ -213,3 +215,4 @@ npm run test:e2e
    - Push your branch to your fork: `git push origin feat/short-feature-description`.
    - Open a PR against `main` on the upstream repository.
    - Include issue links in your PR description: `Closes #80`, `Closes #81`, `Closes #82`, `Closes #83`.
+   - You don't need to request a reviewer. [`.github/CODEOWNERS`](.github/CODEOWNERS) assigns every file to `@TricklePay/maintainers`, so GitHub requests their review when the PR opens.
