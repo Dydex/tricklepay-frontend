@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 import { formatAmount, formatMaxWithdrawHint } from "@/lib/format";
 
 /**
@@ -28,7 +30,7 @@ export function WithdrawPanel({
   onAmountBlur: () => void;
   onSetMax: () => void;
   onWithdraw: () => void;
-}) {
+}): JSX.Element {
   const nothingToWithdraw = blockedReason !== null;
 
   return (

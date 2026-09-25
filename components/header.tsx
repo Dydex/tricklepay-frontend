@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { type JSX, useState, useEffect } from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WalletButton } from "@/components/wallet-button";
@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { href: "/create", label: "New stream" },
 ];
 
-export function Header() {
+export function Header(): JSX.Element {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 

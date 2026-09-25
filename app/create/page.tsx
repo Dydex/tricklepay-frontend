@@ -1,6 +1,8 @@
+import type { JSX } from "react";
+
 import { CreateForm } from "@/components/create-form";
 
-export default function CreatePage() {
+export default function CreatePage(): JSX.Element {
   return (
     <main id="main-content" className="mx-auto max-w-lg px-6 py-10">
       <h1 className="mb-6 text-xl font-semibold">New stream</h1>

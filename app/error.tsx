@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { type JSX, useEffect } from "react";
 
 // Next's file-based error boundary: catches any render-time throw in a page
 // or layout beneath this segment that isn't already handled by that page's
@@ -13,7 +13,7 @@ export default function Error({
 }: {
   error: Error & { digest?: string };
   reset: () => void;
-}) {
+}): JSX.Element {
   useEffect(() => {
     // No error-reporting service is wired up yet; the console is the only
     // record of what actually crashed, so log it rather than only showing

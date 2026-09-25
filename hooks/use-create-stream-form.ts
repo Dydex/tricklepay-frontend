@@ -24,6 +24,28 @@ export type CreateFormField = keyof FormDraft;
 export type CreateFormErrors = Partial<Record<CreateFormField, string>>;
 export type CreateFormRefs = Record<CreateFormField, RefObject<HTMLInputElement | null>>;
 
+/** Everything CreateForm needs from useCreateStreamForm. */
+export interface CreateStreamForm {
+  sender: string | null;
+  values: FormDraft;
+  errors: CreateFormErrors;
+  refs: CreateFormRefs;
+  setField: (field: CreateFormField, value: string) => void;
+  previewRate: bigint | null;
+  previewDuration: string | null;
+  addressesValid: boolean;
+  mismatch: boolean;
+  submitting: boolean;
+  stage: TxStage | null;
+  timeoutHash: string | null;
+  error: string | null;
+  prepared: CreateStreamParams | null;
+  handleSubmit: (e: FormEvent) => Promise<void>;
+  handleConfirm: () => Promise<void>;
+  handleRecoverTimeout: () => Promise<void>;
+  backToEdit: () => void;
+}
+
 // Fields in on-screen order, which is also the order the first invalid one is
 // searched for on submit. Cliff is the only optional field.
 const FIELD_ORDER: CreateFormField[] = ["recipient", "token", "amount", "start", "end", "cliff"];
@@ -40,7 +62,7 @@ const REQUIRED_MESSAGES: Partial<Record<CreateFormField, string>> = {
  * draft), live validation, the review step, and the create / timeout-recovery
  * transactions. Presentation lives in CreateForm and CreateStreamFields.
  */
-export function useCreateStreamForm() {
+export function useCreateStreamForm(): CreateStreamForm {
   const wallet = useWallet();
   const { mismatch, walletNetwork, expectedNetwork } = useNetworkGuard();
   const router = useRouter();

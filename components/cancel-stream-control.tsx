@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 /**
  * The sender's two-step cancel: a "Cancel stream" button that opens an inline
  * confirmation, since cancelling is irreversible. Purely presentational; the
@@ -17,7 +19,7 @@ export function CancelStreamControl({
   onRequestCancel: () => void;
   onConfirm: () => void;
   onDismiss: () => void;
-}) {
+}): JSX.Element {
   if (!confirming) {
     return (
       <button

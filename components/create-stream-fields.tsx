@@ -1,4 +1,4 @@
-import type { FormEvent, ReactNode } from "react";
+import type { JSX, FormEvent, ReactNode } from "react";
 
 import type { CreateFormErrors, CreateFormField, CreateFormRefs } from "@/hooks/use-create-stream-form";
 import type { FormDraft } from "@/lib/create-form-draft";
@@ -89,7 +89,7 @@ export function CreateStreamFields({
   submitting: boolean;
   submitDisabled: boolean;
   onSubmit: (e: FormEvent) => void;
-}) {
+}): JSX.Element {
   const { values, errors, refs, onFieldChange } = fields;
 
   return (

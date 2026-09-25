@@ -1,5 +1,7 @@
 "use client";
 
+import type { JSX } from "react";
+
 import { CreateStreamFields } from "@/components/create-stream-fields";
 import { StreamReview } from "@/components/stream-review";
 import { TimeoutRecoveryAlert } from "@/components/timeout-recovery-alert";
@@ -11,7 +13,7 @@ import { useCreateStreamForm } from "@/hooks/use-create-stream-form";
  * handling lives in useCreateStreamForm; this component only picks which
  * phase to render.
  */
-export function CreateForm() {
+export function CreateForm(): JSX.Element {
   const form = useCreateStreamForm();
 
   if (!form.sender) {

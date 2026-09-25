@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 // Skeleton shimmer primitives and composed page-level skeletons.
 // Every skeleton is sized to match its real counterpart so that no layout shift
 // occurs when data arrives. Dimensions are taken directly from the components
@@ -15,7 +17,7 @@
  * 
  * @param className - Optional CSS classes to control size and spacing. Defaults to empty string.
  */
-export function Skeleton({ className = "" }: { className?: string }) {
+export function Skeleton({ className = "" }: { className?: string }): JSX.Element {
   return (
     <div
       aria-hidden="true"
@@ -31,7 +33,7 @@ export function Skeleton({ className = "" }: { className?: string }) {
 //   - 2×2 grid: From / To / Withdrawable / Total
 //   - time-remaining line at the bottom
 // ---------------------------------------------------------------------------
-export function StreamCardSkeleton() {
+export function StreamCardSkeleton(): JSX.Element {
   return (
     <div
       aria-hidden="true"
@@ -78,7 +80,7 @@ export function StreamCardSkeleton() {
  * 
  * @param count - Number of skeleton cards to render. Defaults to 4.
  */
-export function StreamListSkeleton({ count = 4 }: { count?: number }) {
+export function StreamListSkeleton({ count = 4 }: { count?: number }): JSX.Element {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       {Array.from({ length: count }, (_, i) => (
@@ -97,7 +99,7 @@ export function StreamListSkeleton({ count = 4 }: { count?: number }) {
 //   - 7-field dl grid (From, To, Token, Withdrawn, Start, End, Cliff)
 //   - actions area (one or two buttons)
 // ---------------------------------------------------------------------------
-export function StreamDetailSkeleton() {
+export function StreamDetailSkeleton(): JSX.Element {
   return (
     <div aria-hidden="true">
       {/* Back link */}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { type JSX, useEffect, useState } from "react";
 
 import { LoadingState } from "@/components/loading-state";
 import { StreamDetail } from "@/components/stream-detail";
@@ -10,10 +10,11 @@ import { useStreamTitle } from "@/hooks/use-stream-title";
 import { getStream, isAbortError } from "@/lib/api";
 import type { StreamView } from "@/types/stream";
 
-const POLL_INTERVAL_MS = 10_000;
-const HIDDEN_POLL_INTERVAL_MS = 30_000;
+// How often an open stream refetches in the background. Shorter than the
+// dashboard's interval since someone watching one stream expects it fresher.
+const DETAIL_REFRESH_INTERVAL_MS = 10_000;
 
-export default function StreamDetailPage() {
+export default function StreamDetailPage(): JSX.Element {
   const params = useParams<{ id: string }>();
   const id = params.id;
 

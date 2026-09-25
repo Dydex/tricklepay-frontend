@@ -1,6 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { type JSX, useState } from "react";
+
+// How long the "copied" confirmation stays visible: long enough to notice,
+// short enough that the button is ready again for the next copy.
+const COPIED_FEEDBACK_MS = 1_500;
 
 /**
  * A small button that copies a value to the clipboard and briefly confirms.
@@ -9,14 +13,14 @@ import { useState } from "react";
  * @param value - The string to copy to the clipboard.
  * @param label - Optional descriptive label for accessibility. Defaults to "value".
  */
-export function CopyButton({ value, label }: { value: string; label?: string }) {
+export function CopyButton({ value, label }: { value: string; label?: string }): JSX.Element {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
     try {
       await navigator.clipboard.writeText(value);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setTimeout(() => setCopied(false), COPIED_FEEDBACK_MS);
     } catch {
       // Clipboard unavailable (for example, an insecure context); ignore.
     }
@@ -85,7 +89,7 @@ export function CopyButton({ value, label }: { value: string; label?: string }) 
  * @param url - The URL to share or copy.
  * @param label - Optional descriptive label for accessibility. Defaults to "stream link".
  */
-export function ShareLinkButton({ url, label = "stream link" }: { url: string; label?: string }) {
+export function ShareLinkButton({ url, label = "stream link" }: { url: string; label?: string }): JSX.Element {
   const [shared, setShared] = useState(false);
 
   async function share() {
