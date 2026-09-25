@@ -9,6 +9,10 @@ import type { StreamStatus, StreamView } from "@/types/stream";
 // arrives in visible increments instead of one long stall.
 export const PAGE_SIZE = 25;
 
+// How often the dashboard lists refetch in the background so counterparty
+// changes show up without a reload, without polling the backend too hard.
+const LIST_REFRESH_INTERVAL_MS = 15_000;
+
 export type StreamRole = "sender" | "recipient";
 
 export interface StreamPage {
@@ -183,7 +187,7 @@ export function useStreamPage(
 
     window.addEventListener("focus", onFocus);
     document.addEventListener("visibilitychange", onVisibilityChange);
-    const interval = setInterval(silentRefresh, 15000);
+    const interval = setInterval(silentRefresh, LIST_REFRESH_INTERVAL_MS);
 
     return () => {
       window.removeEventListener("focus", onFocus);

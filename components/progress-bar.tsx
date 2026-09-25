@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 /**
  * A thin progress bar. `value` is in basis points (0 to 10000), matching the
  * contract's progress figure.
@@ -11,7 +13,7 @@ export function ProgressBar({
 }: {
   value: number;
   label?: string;
-}) {
+}): JSX.Element {
   const pct = Math.min(100, Math.max(0, value / 100));
   return (
     <div

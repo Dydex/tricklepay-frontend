@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 import { BrandSpinner } from "@/components/brand-spinner";
 import { StreamDetailSkeleton, StreamListSkeleton } from "@/components/skeleton";
 
@@ -23,7 +25,7 @@ const DEFAULT_LABELS: Record<LoadingStateProps["variant"], string> = {
  * @param count - Number of cards for "stream-list". Defaults to 2.
  * @param label - Screen reader text. Defaults per variant.
  */
-export function LoadingState(props: LoadingStateProps) {
+export function LoadingState(props: LoadingStateProps): JSX.Element {
   const label = props.label ?? DEFAULT_LABELS[props.variant];
 
   // BrandSpinner already renders its own status region and label.

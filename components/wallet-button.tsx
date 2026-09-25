@@ -1,11 +1,13 @@
 "use client";
 
+import type { JSX } from "react";
+
 import { BrandSpinner } from "@/components/brand-spinner";
 import { useWallet } from "@/components/wallet-provider";
 import { useNetworkGuard } from "@/hooks/use-network-guard";
 import { truncateAddress } from "@/lib/format";
 
-export function WalletButton() {
+export function WalletButton(): JSX.Element {
   const wallet = useWallet();
   const { mismatch, walletNetwork, expectedNetwork } = useNetworkGuard();
 

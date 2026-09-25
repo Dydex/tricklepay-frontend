@@ -1,10 +1,11 @@
 import Link from "next/link";
+import type { JSX } from "react";
 
 import { formatAmount, timeRemaining, truncateAddress } from "@/lib/format";
 import { STREAM_STATUS_META } from "@/lib/stream-status";
 import type { StreamStatus, StreamView } from "@/types/stream";
 
-export function StreamCard({ stream }: { stream: StreamView }) {
+export function StreamCard({ stream }: { stream: StreamView }): JSX.Element {
   return (
     <Link
       href={`/streams/${stream.id}`}

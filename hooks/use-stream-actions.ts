@@ -19,6 +19,28 @@ function parseAmount(human: string): bigint | null {
   }
 }
 
+/** Everything StreamActions needs from useStreamActions. */
+export interface StreamActionsState {
+  withdrawable: bigint;
+  nothingToWithdraw: boolean;
+  busy: "withdraw" | "cancel" | null;
+  stage: TxStage | null;
+  timeoutHash: string | null;
+  error: string | null;
+  lastTxHash: string | null;
+  amountInput: string;
+  amountError: string | null;
+  confirmingCancel: boolean;
+  changeAmount: (value: string) => void;
+  blurAmount: () => void;
+  setMaxAmount: () => void;
+  runWithdraw: () => Promise<void>;
+  runCancel: () => Promise<void>;
+  recoverTimeout: () => Promise<void>;
+  openCancelConfirm: () => void;
+  closeCancelConfirm: () => void;
+}
+
 /**
  * Owns StreamActions' data handling: the live withdrawable balance, the
  * withdrawal amount field and its validation, the cancel confirmation step,
@@ -28,7 +50,7 @@ export function useStreamActions(
   stream: StreamView,
   walletAddress: string | null,
   onComplete: () => void,
-) {
+): StreamActionsState {
   const [busy, setBusy] = useState<"withdraw" | "cancel" | null>(null);
   const [stage, setStage] = useState<TxStage | null>(null);
   const [timeoutHash, setTimeoutHash] = useState<string | null>(null);

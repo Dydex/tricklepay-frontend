@@ -1,5 +1,7 @@
 "use client";
 
+import type { JSX } from "react";
+
 import { CancelStreamControl } from "@/components/cancel-stream-control";
 import { TimeoutRecoveryAlert } from "@/components/timeout-recovery-alert";
 import { TransactionProgress } from "@/components/transaction-progress";
@@ -23,7 +25,7 @@ interface Props {
  * shared transaction feedback. Data handling lives in useStreamActions; this
  * component decides which controls the connected wallet gets.
  */
-export function StreamActions({ stream, walletAddress, onComplete }: Props) {
+export function StreamActions({ stream, walletAddress, onComplete }: Props): JSX.Element | null {
   const actions = useStreamActions(stream, walletAddress, onComplete);
 
   if (!walletAddress) return null;

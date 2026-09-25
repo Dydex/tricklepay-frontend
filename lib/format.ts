@@ -1,5 +1,16 @@
 const STROOP_DECIMALS = 7n;
 
+// Characters kept from each end of a truncated address: enough to tell
+// addresses apart at a glance while fitting cards and table cells.
+const ADDRESS_EDGE_LENGTH = 4;
+
+// Unit conversions for the countdowns. Timestamps are Unix seconds; Date works
+// in milliseconds.
+const MS_PER_SECOND = 1000;
+const SECONDS_PER_MINUTE = 60;
+const SECONDS_PER_HOUR = 3600;
+const SECONDS_PER_DAY = 86400;
+
 export interface TokenMetadata {
   name: string;
   symbol: string;
@@ -67,7 +78,7 @@ export function formatAmount(raw: string): string {
  * @returns Truncated address in the form "ABCD...WXYZ" (first 4 and last 4 characters)
  */
 export function truncateAddress(address: string): string {
-  return `${address.slice(0, 4)}...${address.slice(-4)}`;
+  return `${address.slice(0, ADDRESS_EDGE_LENGTH)}...${address.slice(-ADDRESS_EDGE_LENGTH)}`;
 }
 
 /**
@@ -77,7 +88,7 @@ export function truncateAddress(address: string): string {
  * @returns Localized date and time string (format depends on user's locale)
  */
 export function formatTime(unixSeconds: string): string {
-  return new Date(Number(unixSeconds) * 1000).toLocaleString();
+  return new Date(Number(unixSeconds) * MS_PER_SECOND).toLocaleString();
 }
 
 /**
@@ -88,13 +99,13 @@ export function formatTime(unixSeconds: string): string {
  *   "ended" if the time has passed. Fractional seconds are truncated down.
  */
 export function timeRemaining(endTimeSeconds: string): string {
-  const diffMs = Number(endTimeSeconds) * 1000 - Date.now();
+  const diffMs = Number(endTimeSeconds) * MS_PER_SECOND - Date.now();
   if (diffMs <= 0) return "ended";
 
-  const seconds = Math.floor(diffMs / 1000);
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
+  const seconds = Math.floor(diffMs / MS_PER_SECOND);
+  const days = Math.floor(seconds / SECONDS_PER_DAY);
+  const hours = Math.floor((seconds % SECONDS_PER_DAY) / SECONDS_PER_HOUR);
+  const minutes = Math.floor((seconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE);
 
   if (days > 0) return `ends in ${days}d ${hours}h`;
   if (hours > 0) return `ends in ${hours}h ${minutes}m`;
@@ -130,11 +141,11 @@ export function formatMaxWithdrawHint(rawWithdrawable: string): string {
  *   relativeTime("1234567890", "cliff")  → "cliff in 45m"
  */
 export function relativeTime(unixSeconds: string, verb: string): string {
-  const diffMs = Number(unixSeconds) * 1000 - Date.now();
-  const seconds = Math.floor(Math.abs(diffMs) / 1000);
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
+  const diffMs = Number(unixSeconds) * MS_PER_SECOND - Date.now();
+  const seconds = Math.floor(Math.abs(diffMs) / MS_PER_SECOND);
+  const days = Math.floor(seconds / SECONDS_PER_DAY);
+  const hours = Math.floor((seconds % SECONDS_PER_DAY) / SECONDS_PER_HOUR);
+  const minutes = Math.floor((seconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE);
 
   if (diffMs <= 0) {
     // Build a simple past-tense label.
